@@ -6,6 +6,9 @@ function Player(){
   this.angle = 0;
   this.action = [];
   this.reset = 5;
+  this.lap = 1
+  this.halfway = 0
+  this.rewards = 0
 
   this.update = function(){
       player.getVelocity()

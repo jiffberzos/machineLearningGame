@@ -10,17 +10,19 @@ function setup() {
 }
 function draw() {
     updateBackground()
-
     //get reward for current position
     rewards = getReward();
+    for(let i = 0; i < 5; i++){
+      player.rewards += rewards[i]
+    }
     //set stroke colour
     stroke(0,0,0)
     //send state to python backend
     action = model.GetAction(rewards)
     checkCollision(rewards);
+    checkLap();
     getAction(action);
     player.update();
-
 }
 
 function updateBackground(){

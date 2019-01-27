@@ -1,9 +1,12 @@
 function checkCollision(rewards){
   for(i in rewards){
-    if(rewards[i] <10){
+    if(rewards[i] <10 || player.lap > 2){
       player.position = createVector(50,50);
       player.angle = 0;
       player.speed = 0;
+      player.lap = 1
+      player.halfway = 0
+      player.rewards = 0
       model.run += 1;
       model.reset();
     }
@@ -84,24 +87,11 @@ function getReward(){
   line(player.position.x, player.position.y, rightforD[0], rightforD[1])
   line(player.position.x, player.position.y, rightD[0], rightD[1])
 
-  return[getDist(leftD),
-          getDist(leftforD),
-          getDist(forwardD),
-          getDist(rightforD),
-          getDist(rightD)]
-}
-function sendJSON(reward) {
-  console.log("reset: ",JSON.stringify(player.reset));
-  $.ajax({
-    url: '/receiver',
-    data: {reward: JSON.stringify(reward),
-            reset: JSON.stringify(player.reset)},
-    async: false,
-    success: function(result){
-
-      player.action = result;
-    }
-  })
+  return[getDist(leftD)*player.lap,
+          getDist(leftforD)*player.lap,
+          getDist(forwardD)*player.lap,
+          getDist(rightforD)*player.lap,
+          getDist(rightD)*player.lap]
 }
 
 function getAction(action){
@@ -113,5 +103,15 @@ function getAction(action){
   }else if (action[2] ===1){
     player.speed = 1;
     player.angle += 1;
+  }
+}
+
+function checkLap(){
+  if(player.position.x < 150 && player.position.y < 100 && player.halfway == 1){
+    player.lap += 1
+    player.halfway = 0
+  }
+  if(player.position.x > 450 && player.position.y > 300 && player.halfway == 0){
+    player.halfway = 1
   }
 }

@@ -26,7 +26,7 @@ function Model(){
   }
   this.saveWeights = function(){
     weights = this.model.getWeights()
-    if(rewards > this.rewardslist[0]){
+    if(player.rewards > this.rewardslist[0]){
       this.rewardslist.unshift(rewards)
       this.weightslist.unshift(weights)
     }
@@ -58,7 +58,7 @@ function Model(){
       model.SetWeights(0)
     }
     if(model.run > 10){
-      model.setWeights(model.run - 10)
+      model.SetWeights(model.run - 10)
     }
     console.log(model.weightslist)
   }
