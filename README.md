@@ -9,11 +9,11 @@ OK, at the moment the game isn't really using machine learning as much as it cou
 
  See the previous versions at https://github.com/tedbennett?tab=repositories. The initial version used pygame and wasn't too pretty. The next version used p5 on JS with a python backend communicating with Flask. This version had actual learning of the weights. This version was rebuilt using tensorflow.js and is JS through and through, it's also my first play around with HTML and CSS.
 
-##How to get it working
+## How to get it working
 
 Just clone the repository and open index.html in your web browser.
 
-##Description of how it works
+## Description of how it works
 
 The model will use reward based reinforcement learning to determine what action should be made. The reward is the sum of the distances from the character to the walls in 5 forwards directions. These data are passed through a neural network to give an action: right, left or forwards.
 
